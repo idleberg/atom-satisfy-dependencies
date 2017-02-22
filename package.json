@@ -1,6 +1,6 @@
 {
   "name": "satisfy-dependencies",
-  "description": "Satisfies Atom Package Dependencies of installed packages",
+  "description": "Satisfies Atom package dependencies and, optionally, Node dependencies of installed packages",
   "version": "0.2.0",
   "license": "MIT",
   "author": {
