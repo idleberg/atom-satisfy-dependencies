@@ -6,7 +6,7 @@
 [![Travis](https://img.shields.io/travis/idleberg/atom-satisfy-dependencies.svg?style=flat-square)](https://travis-ci.org/idleberg/atom-satisfy-dependencies)
 [![David](https://img.shields.io/david/dev/idleberg/atom-satisfy-dependencies.svg?style=flat-square)](https://david-dm.org/idleberg/atom-satisfy-dependencies?type=dev)
 
-Adds commands that let you quickly satisfy-dependencies Atom-related folders or reveal files you're working on ([details below](#usage))
+Satisfies [Atom Package Dependencies](https://www.npmjs.com/package/atom-package-dependencies) of installed packages
 
 ## Installation
 
