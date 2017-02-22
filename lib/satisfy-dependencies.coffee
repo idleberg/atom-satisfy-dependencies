@@ -24,7 +24,7 @@ module.exports = SatisfyDependencies =
     for loadedPackage in loadedPackages
       continue if atom.packages.isBundledPackage loadedPackage.name
 
-      packageJson = path.join loadedPackage.path, "package.json"
+      packageJson = join loadedPackage.path, "package.json"
 
       try
         packageMeta = require packageJson
