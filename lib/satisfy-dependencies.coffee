@@ -34,7 +34,6 @@ module.exports = SatisfyDependencies =
 
   satisfyDependencies: ->
     loadedPackages = atom.packages.getLoadedPackages()
-    loadedPackages.sort()
 
     atomPackageDependencies = atom.config.get("satisfy-dependencies.atomPackageDependencies")
     nodeDependencies = atom.config.get("satisfy-dependencies.nodeDependencies")
@@ -58,11 +57,11 @@ module.exports = SatisfyDependencies =
   installNodeDependencies: (loadedPackage) ->
     command = @getYarnPath()
     options = {cwd: loadedPackage.path}
-    console.time "#{loadedPackage.name} upgraded"
-    
-    yarn = spawn command, ["upgrade", "--production"], options
-
     stdout = ""
+
+    console.time "#{loadedPackage.name} upgraded"
+
+    yarn = spawn command, ["upgrade", "--production"], options
 
     yarn.stdout.on 'data', (data) ->
       stdout += "#{data.toString()}\n" if atom.inDevMode()
