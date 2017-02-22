@@ -3,6 +3,7 @@
 {CompositeDisposable} = require "atom"
 {install} = require "atom-package-deps"
 {join} = require "path"
+{platform} = require "os"
 {spawn} = require "child_process"
 
 module.exports = SatisfyDependencies =
@@ -74,4 +75,7 @@ module.exports = SatisfyDependencies =
       console.timeEnd "#{loadedPackage.name} dependencies"
 
   getYarnPath: ->
-    join __dirname, "../node_modules/.bin/yarn"
+    if platform() is "win32"
+      join __dirname, "..", "node_modules", "yarn", "bin", "yarn.cmd"
+    else
+      join __dirname, "..", "node_modules", ".bin", "yarn"
