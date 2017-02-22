@@ -6,7 +6,7 @@
 [![Travis](https://img.shields.io/travis/idleberg/atom-satisfy-dependencies.svg?style=flat-square)](https://travis-ci.org/idleberg/atom-satisfy-dependencies)
 [![David](https://img.shields.io/david/dev/idleberg/atom-satisfy-dependencies.svg?style=flat-square)](https://david-dm.org/idleberg/atom-satisfy-dependencies?type=dev)
 
-Satisfies [Atom Package Dependencies](https://www.npmjs.com/package/atom-package-dependencies) of installed packages
+Satisfies Atom [package dependencies](https://www.npmjs.com/package/atom-package-dependencies) and, optionally, Node dependencies of installed packages
 
 ## Installation
 
