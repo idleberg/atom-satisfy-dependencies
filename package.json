@@ -1,0 +1,44 @@
+{
+  "name": "satisfy-dependencies",
+  "description": "Satisfies Atom Package Dependencies of installed packages",
+  "version": "0.0.0",
+  "license": "MIT",
+  "author": {
+    "name": "Jan T. Sott",
+    "url": "http://github.com/idleberg"
+  },
+  "keywords": [
+    "developer",
+    "package-dependencies",
+    "dependencies"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idleberg/atom-satisfy-dependencies.git"
+  },
+  "main": "./lib/satisfy-dependencies",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "activationCommands": {
+    "atom-workspace": [
+      "satisfy-dependencies:all"
+    ]
+  },
+  "devDependencies": {
+    "coffeelint-stylish": "^0.1.2",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-coffeelint": "^0.6.0",
+    "gulp-debug": "^3.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-jsonlint": "^1.2.0",
+    "gulp-lesshint": "^3.0.0",
+    "jshint": "^2.9.4"
+  },
+  "scripts": {
+    "test": "gulp lint"
+  },
+  "dependencies": {
+    "atom-package-deps": "^4.4.1"
+  }
+}
