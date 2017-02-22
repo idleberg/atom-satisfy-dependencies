@@ -52,14 +52,16 @@ module.exports = SatisfyDependencies =
       @installAtomDependencies(loadedPackage.name) if atomPackageDependencies and packageMeta.hasOwnProperty("package-deps") is true
 
   installAtomDependencies: (packageName) ->
-    install packageName
+    console.time "#{packageName} package-deps"
+    install(packageName).then ->
+      console.timeEnd "#{packageName} package-deps"
 
   installNodeDependencies: (loadedPackage) ->
     command = @getYarnPath()
     options = {cwd: loadedPackage.path}
     stdout = ""
 
-    console.time "#{loadedPackage.name} upgraded"
+    console.time "#{loadedPackage.name} dependencies"
 
     yarn = spawn command, ["upgrade", "--production"], options
 
@@ -69,7 +71,7 @@ module.exports = SatisfyDependencies =
     yarn.on 'close', ( errorCode ) ->
       if stdout.length > 0
         console.log stdout if atom.inDevMode()
-      console.timeEnd "#{loadedPackage.name} upgraded"
+      console.timeEnd "#{loadedPackage.name} dependencies"
 
   getYarnPath: ->
     join __dirname, "../node_modules/.bin/yarn"
