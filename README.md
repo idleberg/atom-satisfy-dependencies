@@ -40,6 +40,8 @@ Run any of the following commands from the [Command Palette](https://atom.io/doc
 
 * `Satisfy Dependencies: All`
 
+By default, Node dependencies are not satisfied. This can be changed this in the package settings.
+
 ## License
 
 This work is licensed under the [The MIT License](LICENSE.md).
