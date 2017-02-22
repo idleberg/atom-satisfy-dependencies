@@ -39,6 +39,7 @@
     "test": "gulp lint"
   },
   "dependencies": {
-    "atom-package-deps": "^4.4.1"
+    "atom-package-deps": "^4.4.1",
+    "yarn": "^0.20.3"
   }
 }
