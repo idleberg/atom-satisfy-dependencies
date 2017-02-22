@@ -72,4 +72,4 @@ module.exports = SatisfyDependencies =
       console.timeEnd "#{loadedPackage.name} upgraded"
 
   getYarnPath: ->
-      join __dirname, "../node_modules/.bin/yarn"
+    join __dirname, "../node_modules/.bin/yarn"
