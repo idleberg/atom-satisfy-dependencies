@@ -1,3 +1,4 @@
+meta = require "../package.json"
 
 # Dependencies
 {CompositeDisposable} = require "atom"
@@ -16,10 +17,15 @@ module.exports = SatisfyDependencies =
       order: 0
     nodeDependencies:
       title: "Node Dependencies"
-      description: "Satisfies `dependencies` specified in a package manifest"
+      description: "*Experimental* &mdash; Satisfies `dependencies` specified in a package manifest"
       type: "boolean"
       default: false
       order: 1
+    verboseMode:
+      title: "Verbose Mode"
+      description: "Output progress to the console"
+      type: "boolean"
+      default: false
   subscriptions: null
 
   activate: ->
@@ -36,8 +42,8 @@ module.exports = SatisfyDependencies =
   satisfyDependencies: ->
     loadedPackages = atom.packages.getLoadedPackages()
 
-    atomPackageDependencies = atom.config.get("satisfy-dependencies.atomPackageDependencies")
-    nodeDependencies = atom.config.get("satisfy-dependencies.nodeDependencies")
+    atomPackageDependencies = atom.config.get("#{meta.name}.atomPackageDependencies")
+    nodeDependencies = atom.config.get("#{meta.name}.nodeDependencies")
 
     for loadedPackage in loadedPackages
       continue if atom.packages.isBundledPackage loadedPackage.name
@@ -53,29 +59,32 @@ module.exports = SatisfyDependencies =
       @installAtomDependencies(loadedPackage.name) if atomPackageDependencies and packageMeta.hasOwnProperty("package-deps") is true
 
   installAtomDependencies: (packageName) ->
-    console.time "#{packageName} package-deps"
+    console.time "#{packageName} package dependencies" if atom.config.get("#{meta.name}.verboseMode") is true
     install(packageName).then ->
-      console.timeEnd "#{packageName} package-deps"
+      console.timeEnd "#{packageName} package dependencies" if atom.config.get("#{meta.name}.verboseMode") is true
 
   installNodeDependencies: (loadedPackage) ->
     command = @getYarnPath()
     options = {cwd: loadedPackage.path}
     stdout = ""
 
-    console.time "#{loadedPackage.name} dependencies"
+    console.time "#{loadedPackage.name} Node dependencies" if atom.config.get("#{meta.name}.verboseMode") is true
 
-    yarn = spawn command, ["upgrade", "--production"], options
+    if platform() is "win32"
+      yarn = spawn "cmd.exe", ["/c", command, "install", "--production"], options
+    else
+      yarn = spawn command, ["install", "--production"], options
 
     yarn.stdout.on 'data', (data) ->
-      stdout += "#{data.toString()}\n" if atom.inDevMode()
+      stdout += "#{data.toString()}\n" if atom.config.get("#{meta.name}.verboseMode") is true and atom.inDevMode()
 
     yarn.on 'close', ( errorCode ) ->
       if stdout.length > 0
-        console.log stdout if atom.inDevMode()
-      console.timeEnd "#{loadedPackage.name} dependencies"
+        console.log stdout if atom.config.get("#{meta.name}.verboseMode") is true and atom.inDevMode()
+      console.timeEnd "#{loadedPackage.name} Node dependencies" if atom.config.get("#{meta.name}.verboseMode") is true
 
   getYarnPath: ->
     if platform() is "win32"
-      join __dirname, "..", "node_modules", "yarn", "bin", "yarn.cmd"
+      join __dirname, "..", "node_modules", ".bin", "yarn.cmd"
     else
       join __dirname, "..", "node_modules", ".bin", "yarn"
