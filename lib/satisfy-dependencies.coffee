@@ -59,21 +59,21 @@ module.exports = SatisfyDependencies =
       @installAtomDependencies(loadedPackage.name) if atomPackageDependencies and packageMeta.hasOwnProperty("package-deps") is true
 
   installAtomDependencies: (packageName) ->
-    console.time "#{packageName} package dependencies" if atom.config.get("#{meta.name}.verboseMode") is true
+    console.time "[#{packageName}] install()" if atom.config.get("#{meta.name}.verboseMode") is true
     install(packageName).then ->
-      console.timeEnd "#{packageName} package dependencies" if atom.config.get("#{meta.name}.verboseMode") is true
+      console.timeEnd "[#{packageName}] install()" if atom.config.get("#{meta.name}.verboseMode") is true
 
   installNodeDependencies: (loadedPackage) ->
     command = @getYarnPath()
     options = {cwd: loadedPackage.path}
     stdout = ""
 
-    console.time "#{loadedPackage.name} Node dependencies" if atom.config.get("#{meta.name}.verboseMode") is true
+    console.time "[#{loadedPackage.name}] yarn install" if atom.config.get("#{meta.name}.verboseMode") is true
 
     if platform() is "win32"
-      yarn = spawn "cmd.exe", ["/c", command, "install", "--production"], options
+      yarn = spawn "cmd.exe", ["/c", command, "install", "--production", "--pure-lockfile"], options
     else
-      yarn = spawn command, ["install", "--production"], options
+      yarn = spawn command, ["install", "--production", "--pure-lockfile"], options
 
     yarn.stdout.on 'data', (data) ->
       stdout += "#{data.toString()}\n" if atom.config.get("#{meta.name}.verboseMode") is true and atom.inDevMode()
@@ -81,7 +81,7 @@ module.exports = SatisfyDependencies =
     yarn.on 'close', ( errorCode ) ->
       if stdout.length > 0
         console.log stdout if atom.config.get("#{meta.name}.verboseMode") is true and atom.inDevMode()
-      console.timeEnd "#{loadedPackage.name} Node dependencies" if atom.config.get("#{meta.name}.verboseMode") is true
+      console.timeEnd "[#{loadedPackage.name}] yarn install" if atom.config.get("#{meta.name}.verboseMode") is true
 
   getYarnPath: ->
     if platform() is "win32"
