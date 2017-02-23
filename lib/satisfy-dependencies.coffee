@@ -68,20 +68,18 @@ module.exports = SatisfyDependencies =
     options = {cwd: loadedPackage.path}
     stdout = ""
 
-    console.time "[#{loadedPackage.name}] yarn install" if atom.config.get("#{meta.name}.verboseMode") is true
-
     if platform() is "win32"
       yarn = spawn "cmd.exe", ["/c", command, "install", "--production", "--pure-lockfile"], options
     else
-      yarn = spawn command, ["install", "--production", "--pure-lockfile"], options
+      yarn = spawn( command, ["install", "--production", "--pure-lockfile"], options)
 
     yarn.stdout.on 'data', (data) ->
-      stdout += "#{data.toString()}\n" if atom.config.get("#{meta.name}.verboseMode") is true and atom.inDevMode()
+      stdout += "#{data.toString()}\n" if atom.config.get("#{meta.name}.verboseMode") is true
 
     yarn.on 'close', ( errorCode ) ->
       if stdout.length > 0
-        console.log stdout if atom.config.get("#{meta.name}.verboseMode") is true and atom.inDevMode()
-      console.timeEnd "[#{loadedPackage.name}] yarn install" if atom.config.get("#{meta.name}.verboseMode") is true
+        underline = "=".repeat loadedPackage.name.length
+        console.log "#{loadedPackage.name}\n#{underline}\n#{stdout}" if atom.config.get("#{meta.name}.verboseMode") is true
 
   getYarnPath: ->
     if platform() is "win32"
