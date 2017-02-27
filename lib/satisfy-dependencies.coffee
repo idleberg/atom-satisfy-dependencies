@@ -21,11 +21,18 @@ module.exports = SatisfyDependencies =
       type: "boolean"
       default: false
       order: 1
+    showNotifications:
+      title: "Show Notifications"
+      description: "Show update notifications for package dependencies"
+      type: "boolean"
+      default: true
+      order: 2
     verboseMode:
       title: "Verbose Mode"
       description: "Output progress to the console"
       type: "boolean"
       default: false
+      order: 3
   subscriptions: null
 
   activate: ->
@@ -60,7 +67,8 @@ module.exports = SatisfyDependencies =
 
   installAtomDependencies: (packageName) ->
     console.time "[#{packageName}] install()" if atom.config.get("#{meta.name}.verboseMode") is true
-    install(packageName).then ->
+    notify = atom.config.get("#{meta.name}.showNotifications")
+    install(packageName, notify).then ->
       console.timeEnd "[#{packageName}] install()" if atom.config.get("#{meta.name}.verboseMode") is true
 
   installNodeDependencies: (loadedPackage) ->
