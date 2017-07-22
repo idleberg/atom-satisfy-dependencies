@@ -16,6 +16,8 @@ Install `satisfy-dependencies` from Atom's [Package Manager](http://flight-manua
 
 `$ apm install satisfy-dependencies`
 
+**Note:** Installation might take a bit longer than what you're used to, building binaries takes its time
+
 ### Using Git
 
 Change to your Atom packages directory:
