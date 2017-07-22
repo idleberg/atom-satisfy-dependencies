@@ -41,9 +41,9 @@ module.exports =
     @subscriptions = new CompositeDisposable
 
     # Register command that toggles this view
-    @subscriptions.add atom.commands.add "atom-workspace", "satisfy-dependencies:all": => satisfy(true, true)
-    @subscriptions.add atom.commands.add "atom-workspace", "satisfy-dependencies:atom-packages": => satisfy(true, false)
-    @subscriptions.add atom.commands.add "atom-workspace", "satisfy-dependencies:node-packages": => satisfy(false, true)
+    @subscriptions.add atom.commands.add "atom-workspace", "satisfy-dependencies:all": -> satisfy(true, true)
+    @subscriptions.add atom.commands.add "atom-workspace", "satisfy-dependencies:atom-packages": -> satisfy(true, false)
+    @subscriptions.add atom.commands.add "atom-workspace", "satisfy-dependencies:node-packages": -> satisfy(false, true)
 
   deactivate: ->
     @subscriptions?.dispose()
