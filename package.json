@@ -16,13 +16,15 @@
     "type": "git",
     "url": "git+https://github.com/idleberg/atom-satisfy-dependencies.git"
   },
-  "main": "./lib/satisfy-dependencies",
+  "main": "./lib/main",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
   "activationCommands": {
     "atom-workspace": [
-      "satisfy-dependencies:all"
+      "satisfy-dependencies:all",
+      "satisfy-dependencies:atom-packages",
+      "satisfy-dependencies:node-packages"
     ]
   },
   "devDependencies": {
@@ -39,7 +41,8 @@
     "test": "gulp lint"
   },
   "dependencies": {
-    "atom-package-deps": "^4.4.1",
-    "yarn": "^0.20.3"
+    "atom-package-deps": "^4.6.0",
+    "pnpm": "^1.7.1",
+    "yarn": "^0.27.5"
   }
 }
