@@ -1,16 +1,34 @@
+meta = require "../package.json"
+
 module.exports = Util =
 
-  satisfyDependencies: () ->
-    meta = require "../package.json"
+  getPackageManager: ->
+    packageManager = atom.config.get("#{meta.name}.packageManager")
 
-    require("atom-package-deps").install(meta.name, true)
+    switch packageManager
+      when "pnpm" then return { name: "pnpm", bin: Util.getPnpmPath(), args: ["--no-color", "--no-lock"]}
+      when "yarn" then return  { name: "yarn", bin: Util.getYarnPath(), args: ["--pure-lockfile"]}
+      else return { name: "apm", bin: "apm", args: ["--no-color", "--quiet"]}
 
-    for k, v of meta["package-deps"]
-      if atom.packages.isPackageDisabled(v)
-        console.log "Enabling package '#{v}'" if atom.inDevMode()
-        atom.packages.enablePackage(v)
+  getPnpmPath: ->
+    { join } = require "path"
+    { platform } = require "os"
 
-  spawnAsPromised:  ->
+    if platform() is "win32"
+      return join __dirname, "..", "node_modules", ".bin", "pnpm.cmd"
+    else
+      return join __dirname, "..", "node_modules", ".bin", "pnpm"
+
+  getYarnPath: ->
+    { join } = require "path"
+    { platform } = require "os"
+
+    if platform() is "win32"
+      return join __dirname, "..", "node_modules", ".bin", "yarn.cmd"
+    else
+      return join __dirname, "..", "node_modules", ".bin", "yarn"
+
+  spawnAsPromised: ->
     {spawn} = require "child_process"
 
     args = Array::slice.call(arguments)
