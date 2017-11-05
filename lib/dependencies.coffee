@@ -1,5 +1,3 @@
-meta = require "../package.json"
-
 module.exports = Dependencies =
   satisfy: (installAtomPackages, installNodePackages) ->
     { join } = require "path"
@@ -22,6 +20,7 @@ module.exports = Dependencies =
 
   installAtom: (packageName) ->
     { install } = require "atom-package-deps"
+    meta = require "../package.json"
 
     console.time "#{packageName}: Completed" if atom.config.get("#{meta.name}.verboseMode") is true
 

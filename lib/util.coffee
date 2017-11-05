@@ -1,8 +1,7 @@
-meta = require "../package.json"
-
 module.exports = Util =
-
   getPackageManager: ->
+    meta = require "../package.json"
+
     packageManager = atom.config.get("#{meta.name}.packageManager")
 
     switch packageManager
