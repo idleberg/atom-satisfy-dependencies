@@ -1,10 +1,10 @@
 # satisfy-dependencies
 
-[![apm](https://img.shields.io/apm/l/satisfy-dependencies.svg?style=flat-square)](https://atom.io/packages/satisfy-dependencies)
-[![apm](https://img.shields.io/apm/v/satisfy-dependencies.svg?style=flat-square)](https://atom.io/packages/satisfy-dependencies)
-[![apm](https://img.shields.io/apm/dm/satisfy-dependencies.svg?style=flat-square)](https://atom.io/packages/satisfy-dependencies)
-[![Travis](https://img.shields.io/travis/idleberg/atom-satisfy-dependencies.svg?style=flat-square)](https://travis-ci.org/idleberg/atom-satisfy-dependencies)
-[![David](https://img.shields.io/david/dev/idleberg/atom-satisfy-dependencies.svg?style=flat-square)](https://david-dm.org/idleberg/atom-satisfy-dependencies?type=dev)
+[![apm](https://flat.badgen.net/apm/license/satisfy-dependencies)](https://atom.io/packages/satisfy-dependencies)
+[![apm](https://flat.badgen.net/apm/v/satisfy-dependencies)](https://atom.io/packages/satisfy-dependencies)
+[![apm](https://flat.badgen.net/apm/dl/satisfy-dependencies)](https://atom.io/packages/satisfy-dependencies)
+[![CircleCI](https://flat.badgen.net/circleci/github/idleberg/atom-satisfy-dependencies)](https://circleci.com/gh/idleberg/atom-satisfy-dependencies)
+[![David](https://flat.badgen.net/david/dep/idleberg/atom-satisfy-dependencies)](https://david-dm.org/idleberg/atom-language-nsis)
 
 Satisfies Atom [package dependencies](https://www.npmjs.com/package/atom-package-dependencies) and, optionally, Node dependencies of installed packages
 
