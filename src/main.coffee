@@ -4,7 +4,7 @@ module.exports =
       title: "Package Manager"
       description: "Pick your preferred package manager for installing"
       type: "string",
-      default: "yarn",
+      default: "apm",
       enum: [
         "apm",
         "pnpm",
