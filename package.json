@@ -1,7 +1,7 @@
 {
   "name": "satisfy-dependencies",
   "description": "Satisfies Atom package dependencies and, optionally, Node dependencies of installed packages",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode production",
